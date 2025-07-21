@@ -10,6 +10,8 @@
             </h1>
         </header>
 
+        {{> form }}
+
         <ul>
             {{#each tasks}}
                 {{> task}}
@@ -22,4 +24,11 @@
     <li>
         {{text}}
     </li>
+</template>
+
+<template name="form">
+    <form class="task-form">
+        <input type="text" name="text" placeholder="Type to add new tasks" />
+        <button type="submit">Add Task</button>
+    </form>
 </template>
