@@ -1,0 +1,1 @@
+Just a simple project to learn Meteor with the Blaze lib
