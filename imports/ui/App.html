@@ -21,6 +21,7 @@
                 </div>
             
                 {{> form }}
+                {{error}}
 
                 <div class="filter">
                     <button id="hide-completed-button">
@@ -46,7 +47,7 @@
 
 <template name="form">
     <form class="task-form">
-        <input type="text" name="text" placeholder="Type to add new tasks" />
+        <input style="{{#if error}}border: 1px dotted red;{{/if}}" type="text" name="text" placeholder={{#if error}}{{error}}{{else}}Type to add new tasks{{/if}} />
         <button type="submit">Add Task</button>
     </form>
 </template>
