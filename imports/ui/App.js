@@ -75,8 +75,18 @@ Template.mainContainer.events({
     }
 });
 
+Template.form.onCreated(function mainContainerOnCreated() {
+    this.state = new ReactiveDict();
+})
+
+Template.form.helpers({
+    error: () => Template.instance().state.get('error')
+})
+
 Template.form.events({
-    "submit .task-form"(event) {
+    "submit .task-form"(event, template) {
+        console.log(template);
+        
         //Prevent default browser form submit
         event.preventDefault();
 
@@ -91,10 +101,14 @@ Template.form.events({
             userId: getUser()._id,
             createdAt: new Date() // current time
             })
-            
+
             console.log(event);
         } else {
-            console.log('Task text cannot be empty');
+            template.state.set('error', 'Task text cannot be empty');
+
+            setTimeout(() => {
+                template.state.set('error', '');
+            }, 3000);
         }
 
         //Clear form
