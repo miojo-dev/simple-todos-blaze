@@ -5,6 +5,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import './App.html';
 import './Task.js';
 import './Login.js';
+import { timers } from 'jquery';
 
 const HIDE_COMPLETED_STRING = 'hideCompleted';
 
@@ -83,23 +84,20 @@ Template.form.events({
         const target = event.target;
         const text = target.text.value;
 
-        TasksCollection.insert({
-            text,
-            userId: getUser()._id,
-            createdAt: new Date() // current time
-        })
-
         if(!!text){
             //Insert a task into the collection
             TasksCollection.insert({
-                text,
-                createdAt: new Date() // current time
-            });
-
+            text,
+            userId: getUser()._id,
+            createdAt: new Date() // current time
+            })
+            
             console.log(event);
+        } else {
+            console.log('Task text cannot be empty');
         }
 
-        //clear form
-        target.text.value ='';
+        //Clear form
+        target.text.value = '';
     }
 });
