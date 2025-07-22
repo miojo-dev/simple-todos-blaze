@@ -8,7 +8,7 @@
             <div class="app-bar">
                 <div class="app-header">
                     <h1>
-                        📝️ To Do List
+                        📝️ To Do List{{incompleteCount}}
                     </h1>
                 </div>
             </div>
@@ -16,6 +16,16 @@
 
         <div class="main">
             {{> form }}
+
+            <div class="filter">
+                <button id="hide-completed-button">
+                    {{#if hideCompleted}}
+                        Show All
+                    {{else}}
+                        Hide Completed
+                    {{/if}}
+                </button>
+            </div>
 
             <ul class="tasks">
                 {{#each tasks}}

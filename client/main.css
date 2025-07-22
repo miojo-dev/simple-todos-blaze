@@ -85,6 +85,15 @@ header {
   margin-right: 1em;
 }
 
+.filter {
+  display: flex;
+  justify-content: center;
+}
+
+.filter > button {
+  background-color: var(--accent);
+}
+
 .task-form {
   display: flex;
   margin: 16px;
