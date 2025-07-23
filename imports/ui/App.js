@@ -5,7 +5,6 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import './App.html';
 import './Task.js';
 import './Login.js';
-import { timers } from 'jquery';
 
 const HIDE_COMPLETED_STRING = 'hideCompleted';
 

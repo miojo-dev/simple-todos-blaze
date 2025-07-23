@@ -146,12 +146,13 @@ header {
   justify-content: center;
 }
 
-.filter > button {
+#hide-completed-button {
   background-color: var(--accent);
   transition: .3s ease-in-out;
 }
 
-hide-completed-button :hover {
+#hide-completed-button :hover {
+  text-decoration: underline;
   background-color: var(--main-dark);
   transition: .5s ease-in-out;
 }
