@@ -194,6 +194,7 @@ header {
 }
 
 .tasks > li > button {
+  width: 25px;
   justify-self: flex-end;
   background-color: var(--accent);
   transition: .3s ease-in-out;
