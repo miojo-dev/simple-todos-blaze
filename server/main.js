@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts} from 'meteor/accounts-base';
-import { TasksCollection } from '../imports/api/TasksCollection';
+import { TasksCollection } from '../imports/db/TasksCollection.js';
 import '../imports/api/tasksMethods.js';
 
 const SEED_USERNAME = 'meteorite';

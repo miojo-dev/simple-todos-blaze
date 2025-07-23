@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { TasksCollection } from '../api/TasksCollection';
+import { TasksCollection } from '../db/TasksCollection.js';
 import { ReactiveDict } from 'meteor/reactive-dict';
 
 import './App.html';
@@ -98,6 +98,7 @@ Template.form.events({
             //Insert a task into the collection
             Meteor.call('tasks.insert', text);
         } else {
+            //Not working at the moment!!!
             template.state.set('error', 'Task text cannot be empty');
 
             setTimeout(() => {
