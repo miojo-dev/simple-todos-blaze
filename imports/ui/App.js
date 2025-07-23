@@ -11,6 +11,7 @@ const HIDE_COMPLETED_STRING = 'hideCompleted';
 
 const getUser = () => Meteor.user();
 const isUserLogged = () => !!getUser();
+const IS_LOADING_STRING = 'isLoading';
 
 const getTasksFilter = () => {
     const user = getUser();
@@ -26,7 +27,12 @@ const getTasksFilter = () => {
 
 Template.mainContainer.onCreated(function mainContainerOnCreated() {
     this.state = new ReactiveDict();
-})
+
+    const handler = Meteor.subscribe('tasks');
+    Tracker.autorun(() => {
+        this.state.set(IS_LOADING_STRING, !handler.ready());
+    });
+});
 
 Template.mainContainer.helpers ({
     tasks() {
@@ -43,9 +49,16 @@ Template.mainContainer.helpers ({
             sort: { createdAt: -1 } 
         }).fetch();
     },
+
+    isLoading() {
+        const instance = Template.instance();
+        return instance.state.get(IS_LOADING_STRING);
+    },
+
     hideCompleted() {
         return Template.instance().state.get(HIDE_COMPLETED_STRING);
     },
+
     incompleteCount() {
         if (!isUserLogged()) {
             return '';
@@ -56,16 +69,18 @@ Template.mainContainer.helpers ({
         const incompleteTasksCount = TasksCollection.find(pendingOnlyFilter).count();
         return incompleteTasksCount ? ` (${incompleteTasksCount})` : '';
     },
+
     isUserLogged() {
         return isUserLogged();
     },
+    
     getUser() {
         return getUser();
     }
 });
 
 Template.mainContainer.events({
-    "click #hide-completed"(event, instance) {
+    "click #hide-completed-button"(event, instance) {
         const currentHideCompleted = instance.state.get(HIDE_COMPLETED_STRING);
         instance.state.set(HIDE_COMPLETED_STRING, !currentHideCompleted);
     },
