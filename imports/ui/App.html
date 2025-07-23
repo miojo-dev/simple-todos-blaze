@@ -47,7 +47,7 @@
 
 <template name="form">
     <form class="task-form">
-        <input style="{{#if error}}border: 1px dotted red;{{/if}}" type="text" name="text" placeholder={{#if error}}{{error}}{{else}}Type to add new tasks{{/if}} />
+        <input type="text" name="text" placeholder="Type to add new tasks" />
         <button type="submit">Add Task</button>
     </form>
 </template>

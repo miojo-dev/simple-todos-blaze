@@ -93,18 +93,9 @@ Template.form.events({
         const target = event.target;
         const text = target.text.value;
 
-        //Prevent empty task submission
-        if(!!text){
-            //Insert a task into the collection
-            Meteor.call('tasks.insert', text);
-        } else {
-            //Not working at the moment!!!
-            template.state.set('error', 'Task text cannot be empty');
-
-            setTimeout(() => {
-                template.state.set('error', '');
-            }, 3000);
-        }
+        
+        //Insert a task into the collection
+        Meteor.call('tasks.insert', text);
 
         //Clear form
         target.text.value = '';
