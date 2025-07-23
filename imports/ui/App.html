@@ -31,7 +31,11 @@
                         {{/if}}
                     </button>
                 </div>
-
+                    {{#if isLoading}}
+                        <div class="loading">
+                            Loading...
+                        </div>
+                    {{/if}}
                 <ul class="tasks">
                     {{#each tasks}}
                         {{> task}}
