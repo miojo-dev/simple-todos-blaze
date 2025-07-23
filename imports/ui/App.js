@@ -84,8 +84,7 @@ Template.form.helpers({
 })
 
 Template.form.events({
-    "submit .task-form"(event, template) {
-        console.log(template);
+    "submit .task-form"(event) {
         
         //Prevent default browser form submit
         event.preventDefault();
@@ -94,15 +93,10 @@ Template.form.events({
         const target = event.target;
         const text = target.text.value;
 
+        //Prevent empty task submission
         if(!!text){
             //Insert a task into the collection
-            TasksCollection.insert({
-            text,
-            userId: getUser()._id,
-            createdAt: new Date() // current time
-            })
-
-            console.log(event);
+            Meteor.call('tasks.insert', text);
         } else {
             template.state.set('error', 'Task text cannot be empty');
 

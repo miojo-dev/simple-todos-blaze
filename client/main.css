@@ -1,10 +1,15 @@
 :root {
   --main-dark: #183a37ff;
   --second: #77b28cff;
+  --second-dark: #6a9f7eff;
   --accent: #c44900ff;
   --accent-dark: #a33f00ff;
   --main-light: #c2c5bbff;
-  --second-light: #c2c5bbff;
+  --second-light: #e0e2d8ff;
+}
+
+* {
+  accent-color: var(--accent);
 }
 
 body {
@@ -12,7 +17,6 @@ body {
   background-color: var(--secondary);
   background-image: linear-gradient(to bottom, var(--main-light), var(--second-light) 100%);
   background-attachment: fixed;
-
   position: absolute;
   top: 0;
   bottom: 0;
