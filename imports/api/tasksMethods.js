@@ -3,8 +3,9 @@ import { TasksCollection } from '../db/TasksCollection';
 import { Meteor } from 'meteor/meteor';
 
 Meteor.methods({
-    'tasks.insert'(text) {
+    'tasks.insert'(text, description) {
         check(text, String);
+        check(description, String);
 
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
@@ -12,8 +13,10 @@ Meteor.methods({
 
         TasksCollection.insert({
             text,
+            description,
             createdAt: new Date(),
             userId: this.userId,
+            isChecked: false,
         });
     },
 
@@ -41,15 +44,16 @@ Meteor.methods({
             throw new Meteor.Error('Not authorized');
         }
 
-        const task = TasksCollection.findOne({ _id: taskId,iserId: this.userId })
+        const task = TasksCollection.findOne({ _id: taskId, userId: this.userId })
 
         if (!task) {
             throw new Meteor.Error('Access denied.');
         }
 
+
         TasksCollection.update(taskId, { 
             $set: { 
-                checked: setChecked 
+                isChecked: isChecked
             } 
         });
     },

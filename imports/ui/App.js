@@ -5,7 +5,6 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import './App.html';
 import './Task.js';
 import './Login.js';
-import { timers } from 'jquery';
 
 const HIDE_COMPLETED_STRING = 'hideCompleted';
 
@@ -83,6 +82,7 @@ Template.mainContainer.events({
     "click #hide-completed-button"(event, instance) {
         const currentHideCompleted = instance.state.get(HIDE_COMPLETED_STRING);
         instance.state.set(HIDE_COMPLETED_STRING, !currentHideCompleted);
+        console.log('Hide completed tasks:', !currentHideCompleted);
     },
 
     'click .user'() {
@@ -94,10 +94,6 @@ Template.form.onCreated(function mainContainerOnCreated() {
     this.state = new ReactiveDict();
 })
 
-Template.form.helpers({
-    error: () => Template.instance().state.get('error')
-})
-
 Template.form.events({
     "submit .task-form"(event) {
         
@@ -107,12 +103,19 @@ Template.form.events({
         //Get value from form element
         const target = event.target;
         const text = target.text.value;
+        const description = target.description.value;
+
+        //Set the first letter of text and description to uppercase
+        //This is just a stylistic choice to make the UI look better
+        const Text = text.replace(/^./, c => c.toUpperCase());
+        const Description = description.replace(/^./, c => c.toUpperCase());
 
         
         //Insert a task into the collection
-        Meteor.call('tasks.insert', text);
+        Meteor.call('tasks.insert', Text, Description);
 
         //Clear form
         target.text.value = '';
+        target.description.value = '';
     }
 });
