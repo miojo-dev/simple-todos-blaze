@@ -3,8 +3,9 @@ import { TasksCollection } from '../db/TasksCollection';
 import { Meteor } from 'meteor/meteor';
 
 Meteor.methods({
-    'tasks.insert'(text) {
+    'tasks.insert'(text, description) {
         check(text, String);
+        check(description, String);
 
         if (!this.userId) {
             throw new Meteor.Error('not-authorized');
@@ -12,9 +13,10 @@ Meteor.methods({
 
         TasksCollection.insert({
             text,
+            description,
             createdAt: new Date(),
             userId: this.userId,
-            checked: false,
+            isChecked: false,
         });
     },
 
@@ -51,7 +53,7 @@ Meteor.methods({
 
         TasksCollection.update(taskId, { 
             $set: { 
-                checked: isChecked
+                isChecked: isChecked
             } 
         });
     },

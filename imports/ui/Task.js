@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 
 Template.task.events({
     'click.toggle-checked'() {
-        Meteor.call('tasks.setIsChecked', this._id, !this.checked);
+        Meteor.call('tasks.setIsChecked', this._id, !this.isChecked);
     },
     'click .delete'() {
         Meteor.call('tasks.remove', this._id);

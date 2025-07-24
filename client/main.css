@@ -146,15 +146,21 @@ header {
   justify-content: center;
 }
 
-#hide-completed-button {
+.filter > button {
   background-color: var(--accent);
+  color: var(--main-light);
+  padding: 8px 16px;
+  margin: 0 4px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
   transition: .3s ease-in-out;
 }
 
-#hide-completed-button :hover {
-  text-decoration: underline;
-  background-color: var(--main-dark);
+.filter > button:hover {
+  background-color: var(--accent-dark);
   transition: .5s ease-in-out;
+  box-shadow: none;
 }
 
 .task-form {
@@ -186,6 +192,7 @@ header {
 .task-form > button:hover {
   background-color: var(--accent-dark);
   transition: .5s ease-in-out;
+  box-shadow: none;
 }
 
 .tasks {
@@ -199,15 +206,35 @@ header {
 
 .tasks > li {
   display: flex;
+  width: 100%;
   padding: 16px;
   border-bottom: var(--main-light) solid 1px;
 }
 
-.tasks > li > span {
+tasks > li > .text {
+  display: flex;
+  flex-direction: collumn;
   flex-grow: 1;
+  position: relative;
+}
+
+.tasks > li > .text > span {
+  display: flex;
+  flex-direction: collumn;
+  flex-grow: 1;
+  position: relative;
+  color: var(--main-dark);
+  margin-left: 1rem;
+}
+
+.tasks > li > .text > .title {
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 .tasks > li > button {
+  right: 5%;
+  position: absolute;
   width: 25px;
   justify-self: flex-end;
   background-color: var(--accent);
@@ -217,6 +244,7 @@ header {
 .tasks > li > button:hover {
   background-color: var(--accent-dark);
   transition: .5s ease-in-out;
+  box-shadow: none;
 }
 
 .user {
