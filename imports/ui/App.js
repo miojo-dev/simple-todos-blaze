@@ -15,7 +15,7 @@ const IS_LOADING_STRING = 'isLoading';
 const getTasksFilter = () => {
     const user = getUser();
 
-    const hideCompletedFilter = { isChecked: { $ne: true } };
+    const hideCompletedFilter = { checked: { $ne: true } };
 
     const userFilter = user ? { userId: user._id } : {};
 
@@ -82,6 +82,7 @@ Template.mainContainer.events({
     "click #hide-completed-button"(event, instance) {
         const currentHideCompleted = instance.state.get(HIDE_COMPLETED_STRING);
         instance.state.set(HIDE_COMPLETED_STRING, !currentHideCompleted);
+        console.log('Hide completed tasks:', !currentHideCompleted);
     },
 
     'click .user'() {

@@ -14,6 +14,7 @@ Meteor.methods({
             text,
             createdAt: new Date(),
             userId: this.userId,
+            checked: false,
         });
     },
 
@@ -41,15 +42,16 @@ Meteor.methods({
             throw new Meteor.Error('Not authorized');
         }
 
-        const task = TasksCollection.findOne({ _id: taskId,iserId: this.userId })
+        const task = TasksCollection.findOne({ _id: taskId, userId: this.userId })
 
         if (!task) {
             throw new Meteor.Error('Access denied.');
         }
 
+
         TasksCollection.update(taskId, { 
             $set: { 
-                checked: setChecked 
+                checked: isChecked
             } 
         });
     },
